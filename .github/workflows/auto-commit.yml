@@ -1,0 +1,31 @@
+name: Auto Commit & Push
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+
+jobs:
+  auto-commit:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Configure Git
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+
+    - name: Check for changes
+      run: |
+        git add -A
+        if ! git diff-index --quiet HEAD --; then
+          git commit -m "auto: update project changes - $(date)"
+          git push
+        else
+          echo "No changes to commit"
+        fi
