@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="vi" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nghiên cứu phương pháp đánh giá tầm phủ VHF — Long Thành</title>
+  <meta name="description" content="Nghiên cứu phương pháp đánh giá tầm phủ VHF Air-Ground tại Trung tâm Kiểm soát không lưu Long Thành: mô phỏng truyền sóng Radio Mobile, mô hình Longley-Rice, tiêu chuẩn ICAO Annex 10 và bản đồ tầm phủ tương tác." />
+  <meta name="theme-color" content="#0b1220" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><circle cx='12' cy='12' r='10' fill='%230b1220'/></svg>" />
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <!-- KaTeX CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+        integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous" />
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+<body>
+  <!-- ===================== NAVBAR ===================== -->
+  <header class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="#top" class="brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/><circle cx="12" cy="12" r="10"/>
+          </svg>
+        </span>
+        <span class="brand-text">
+          <strong>VHF Coverage</strong>
+          <small>Long Thành ATC</small>
+        </span>
+      </a>
+
+      <nav class="nav-links" id="nav-links" aria-label="Mục lục">
+        <a href="#muc-dich" class="nav-link" data-target="muc-dich">Mục đích</a>
+        <a href="#phuong-phap" class="nav-link" data-target="phuong-phap">Phương pháp</a>
+        <a href="#tieu-chuan" class="nav-link" data-target="tieu-chuan">Tiêu chuẩn ICAO</a>
+        <a href="#radio-mobile" class="nav-link" data-target="radio-mobile">Radio Mobile</a>
+        <a href="#huong-dan" class="nav-link" data-target="huong-dan">Hướng dẫn</a>
+        <a href="#ket-qua" class="nav-link" data-target="ket-qua">Bản đồ</a>
+      </nav>
+
+      <button class="nav-toggle" id="nav-toggle" aria-label="Mở menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="scroll-progress" id="scroll-progress"></div>
+  </header>
+
+  <main id="top">
+    <!-- ===================== HERO ===================== -->
+    <section class="hero">
+      <div class="hero-grid-bg" aria-hidden="true"></div>
+      <div class="container hero-inner">
+        <span class="eyebrow">Báo cáo kỹ thuật &middot; Thông tin liên lạc hàng không</span>
+        <h1 class="hero-title text-balance">
+          Nghiên cứu phương pháp đánh giá<br />
+          <span class="accent">tầm phủ VHF</span> tại Trung tâm Kiểm soát không lưu Long Thành
+        </h1>
+        <p class="hero-sub text-pretty">
+          Đánh giá vùng phủ sóng thoại Không &ndash; Địa (VHF Air-Ground) bằng mô phỏng truyền sóng
+          trên mô hình địa hình số, đối chiếu tiêu chuẩn ICAO và trực quan hóa kết quả trên bản đồ tương tác.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#muc-dich" class="btn btn-primary">Bắt đầu đọc</a>
+          <a href="#ket-qua" class="btn btn-ghost">Xem bản đồ tầm phủ</a>
+        </div>
+
+        <dl class="hero-stats">
+          <div class="stat">
+            <dt>Băng tần</dt>
+            <dd>118&ndash;137 <span>MHz</span></dd>
+          </div>
+          <div class="stat">
+            <dt>Độ tin cậy mục tiêu</dt>
+            <dd>&ge;95 <span>%</span></dd>
+          </div>
+          <div class="stat">
+            <dt>Mô hình truyền sóng</dt>
+            <dd>Longley<span>-Rice ITM</span></dd>
+          </div>
+          <div class="stat">
+            <dt>Mực bay đánh giá</dt>
+            <dd>FL100<span> / FL200</span></dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ===================== 1. MỤC ĐÍCH ===================== -->
+    <section id="muc-dich" class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-num">01</span>
+          <div>
+            <h2 class="section-title">Mục đích nghiên cứu</h2>
+            <p class="section-lead text-pretty">Vì sao việc đánh giá tầm phủ VHF tại khu vực Long Thành là yêu cầu bắt buộc.</p>
+          </div>
+        </div>
+
+        <div class="card-grid cols-3">
+          <article class="card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
+            </div>
+            <h3>Liên lạc thoại liên tục</h3>
+            <p>Đảm bảo thông tin liên lạc thoại Không &ndash; Địa (VHF Air-Ground) ổn định, không gián đoạn trong toàn bộ bán kính điều hành được giao cho kiểm soát viên không lưu.</p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3>An toàn điều hành bay</h3>
+            <p>Vùng phủ sóng tin cậy là điều kiện tiên quyết cho an toàn: mọi tàu bay trong vùng trời kiểm soát phải duy trì được liên lạc hai chiều với đài kiểm soát.</p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 5-6"/></svg>
+            </div>
+            <h3>Nghiệm thu &amp; tối ưu vị trí trạm</h3>
+            <p>Đáp ứng yêu cầu kiểm tra, nghiệm thu công trình và làm cơ sở khoa học để tối ưu hóa vị trí, độ cao đặt anten trạm phát VHF.</p>
+          </article>
+        </div>
+
+        <div class="callout callout-accent">
+          <div class="callout-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+          </div>
+          <p><strong>Yêu cầu cốt lõi:</strong> Độ tin cậy tín hiệu (Signal Availability) trong vùng trời kiểm soát phải đạt <strong>từ 95% trở lên</strong> theo khuyến cáo của ICAO, để bảo đảm dịch vụ thông tin liên lạc hàng không liên tục.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 2. PHƯƠNG PHÁP ===================== -->
+    <section id="phuong-phap" class="section section-alt">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-num">02</span>
+          <div>
+            <h2 class="section-title">Phương pháp &amp; yếu tố ảnh hưởng</h2>
+            <p class="section-lead text-pretty">Các công cụ đánh giá tầm phủ và những yếu tố vật lý chi phối lan truyền sóng VHF.</p>
+          </div>
+        </div>
+
+        <h3 class="subhead">Các phương pháp đánh giá</h3>
+        <div class="card-grid cols-2">
+          <article class="card method-card">
+            <span class="tag tag-blue">Phương pháp A</span>
+            <h3>Mô phỏng máy tính</h3>
+            <p>Sử dụng phần mềm mô hình hóa truyền sóng (Radio Mobile) trên dữ liệu địa hình số để dự đoán vùng phủ trước khi triển khai thực địa.</p>
+            <ul class="pros-cons">
+              <li class="pro">Chi phí thấp, nhanh, lặp lại được nhiều kịch bản</li>
+              <li class="pro">Đánh giá được trước khi xây dựng trạm</li>
+              <li class="con">Phụ thuộc độ chính xác dữ liệu địa hình &amp; mô hình</li>
+            </ul>
+          </article>
+
+          <article class="card method-card">
+            <span class="tag tag-amber">Phương pháp B</span>
+            <h3>Bay kiểm tra / hiệu chuẩn</h3>
+            <p>Bay kiểm tra kỹ thuật (Flight Inspection) đo trực tiếp cường độ tín hiệu thực tế trên tàu bay tại các vị trí và mực bay khác nhau.</p>
+            <ul class="pros-cons">
+              <li class="pro">Phản ánh điều kiện thực tế chính xác nhất</li>
+              <li class="con">Chi phí rất cao, cần tàu bay &amp; thiết bị chuyên dụng</li>
+              <li class="con">Khó lặp lại, phụ thuộc thời tiết</li>
+            </ul>
+          </article>
+        </div>
+
+        <p class="note">
+          <strong>Kết hợp hai phương pháp:</strong> Mô phỏng được dùng để khoanh vùng và tối ưu thiết kế; bay kiểm tra được dùng để xác nhận, hiệu chuẩn kết quả mô phỏng tại các điểm trọng yếu.
+        </p>
+
+        <h3 class="subhead">Các yếu tố cốt lõi ảnh hưởng tới tầm phủ</h3>
+        <div class="card-grid cols-2">
+          <article class="card factor-card">
+            <h3><span class="factor-no">1</span> Địa hình vật lý</h3>
+            <p>Vật cản tự nhiên (núi, đồi) và nhân tạo (nhà cao tầng khu vực lân cận sân bay) gây che chắn, phản xạ và làm suy giảm tín hiệu.</p>
+          </article>
+
+          <article class="card factor-card">
+            <h3><span class="factor-no">2</span> Vùng Fresnel</h3>
+            <p>Độ thông thoáng của vùng Fresnel quyết định chất lượng &amp; cường độ tín hiệu. Vật cản lấn vào vùng Fresnel thứ nhất gây suy hao đáng kể dù vẫn còn tầm nhìn thẳng.</p>
+            <div class="formula" data-tex="r = 17.31\sqrt{\dfrac{d_1 \, d_2}{f \,(d_1 + d_2)}}"></div>
+            <p class="formula-note">Bán kính vùng Fresnel <em>r</em> (m), khoảng cách <em>d</em> (km), tần số <em>f</em> (GHz).</p>
+          </article>
+
+          <article class="card factor-card">
+            <h3><span class="factor-no">3</span> Độ cong Trái Đất (LOS)</h3>
+            <p>Sóng VHF lan truyền theo tầm nhìn thẳng (Line-of-Sight), bị giới hạn bởi độ cong Trái Đất. Tầm phủ tăng theo căn bậc hai độ cao của anten phát và máy thu trên tàu bay.</p>
+            <div class="formula" data-tex="d_{LOS} \approx 4.12\left(\sqrt{h_{tx}} + \sqrt{h_{rx}}\right)"></div>
+            <p class="formula-note">Khoảng cách LOS <em>d</em> (km), độ cao <em>h</em> (m) — đã tính hệ số K = 4/3.</p>
+          </article>
+
+          <article class="card factor-card">
+            <h3><span class="factor-no">4</span> Nhiễu xạ &amp; khúc xạ tầng đối lưu</h3>
+            <p>Khí quyển làm sóng vô tuyến bị bẻ cong nhẹ xuống dưới, mở rộng tầm nhìn vô tuyến so với tầm nhìn quang học. Áp dụng hệ số bán kính Trái Đất hiệu dụng:</p>
+            <div class="formula" data-tex="K = \dfrac{4}{3} \quad\Rightarrow\quad R_{eff} = \dfrac{4}{3}R_{earth}"></div>
+            <p class="formula-note">K = 4/3 cho điều kiện khí quyển tiêu chuẩn.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 3. TIÊU CHUẨN ICAO ===================== -->
+    <section id="tieu-chuan" class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-num">03</span>
+          <div>
+            <h2 class="section-title">Tài liệu tham chiếu &amp; tiêu chuẩn ICAO</h2>
+            <p class="section-lead text-pretty">Cơ sở pháp lý và kỹ thuật quốc tế cho việc quy hoạch và đánh giá tầm phủ VHF.</p>
+          </div>
+        </div>
+
+        <div class="card-grid cols-2">
+          <article class="card doc-card">
+            <span class="doc-badge">ICAO</span>
+            <h3>Annex 10 &mdash; Volume V</h3>
+            <p class="doc-sub">Aeronautical Telecommunications &mdash; Aeronautical Radio Frequency Spectrum Utilization</p>
+            <p>Quy định về sử dụng phổ tần số vô tuyến điện hàng không, bao gồm phân bổ kênh VHF (giãn cách 25 kHz / 8.33 kHz) và yêu cầu kỹ thuật với hệ thống thoại Không &ndash; Địa.</p>
+          </article>
+
+          <article class="card doc-card">
+            <span class="doc-badge">ICAO</span>
+            <h3>Doc 9718</h3>
+            <p class="doc-sub">Handbook on Radio Frequency Spectrum Requirements for Civil Aviation</p>
+            <p>Hướng dẫn chi tiết về quy hoạch tần số và phương pháp tính toán tầm phủ nhằm bảo đảm dịch vụ thông tin liên lạc, bao gồm tiêu chí bảo vệ và tái sử dụng tần số.</p>
+          </article>
+        </div>
+
+        <h3 class="subhead">Yêu cầu đối với tháp ATC (điều hành tại sân)</h3>
+        <div class="req-grid">
+          <div class="req-item">
+            <div class="req-value">75 <span>&micro;V/m</span></div>
+            <p>Cường độ trường tối thiểu (Minimum field strength) cần đảm bảo trong vùng trời kiểm soát theo khuyến cáo ICAO.</p>
+          </div>
+          <div class="req-item">
+            <div class="req-value">&ge;95 <span>%</span></div>
+            <p>Độ tin cậy tín hiệu (Signal Availability) tối thiểu để dịch vụ liên lạc được coi là liên tục, ổn định.</p>
+          </div>
+          <div class="req-item">
+            <div class="req-value">2&times; <span>chiều</span></div>
+            <p>Liên lạc hai chiều (đường lên &amp; đường xuống) đều phải đạt ngưỡng — đánh giá cả Tx và Rx.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 4. RADIO MOBILE ===================== -->
+    <section id="radio-mobile" class="section section-alt">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-num">04</span>
+          <div>
+            <h2 class="section-title">Công cụ mô phỏng Radio Mobile</h2>
+            <p class="section-lead text-pretty">Phần mềm mô phỏng truyền sóng vô tuyến dựa trên mô hình hình học địa hình số.</p>
+          </div>
+        </div>
+
+        <div class="split">
+          <div class="split-text">
+            <p>
+              <strong>Radio Mobile</strong> là phần mềm miễn phí mô phỏng lan truyền sóng vô tuyến trên mô hình
+              địa hình số (DTM). Phần mềm cho phép tạo mạng (Network), bố trí các trạm (Units), cấu hình hệ thống
+              thu/phát và tính toán vùng phủ theo cường độ tín hiệu trên nền bản đồ địa hình thực.
+            </p>
+            <h3 class="subhead-sm">Mô hình truyền sóng &mdash; Longley-Rice (ITM)</h3>
+            <p>
+              Radio Mobile sử dụng mô hình <strong>Longley-Rice / Irregular Terrain Model (ITM)</strong>. Đây là mô hình
+              tối ưu và chuẩn xác nhất cho băng tần VHF hàng không dân dụng vì:
+            </p>
+            <ul class="feature-list">
+              <li>Tính đến mặt cắt địa hình thực tế giữa máy phát và máy thu (point-to-point).</li>
+              <li>Mô hình hóa nhiễu xạ qua vật cản, phản xạ mặt đất và khúc xạ tầng đối lưu.</li>
+              <li>Áp dụng tốt cho dải tần 20 MHz &ndash; 20 GHz, phù hợp hoàn toàn với VHF 118&ndash;137 MHz.</li>
+              <li>Cho phép cấu hình hệ số khúc xạ (K = 4/3) và độ tin cậy thống kê theo thời gian/vị trí.</li>
+            </ul>
+          </div>
+
+          <aside class="spec-panel">
+            <h4>Nguồn dữ liệu địa hình số</h4>
+            <dl class="spec-list">
+              <div><dt>Bộ dữ liệu</dt><dd>SRTM DTED</dd></div>
+              <div><dt>Khu vực</dt><dd>Phía Nam / Long Thành</dd></div>
+              <div><dt>Độ phân giải</dt><dd>~ 90 m (SRTM-3)</dd></div>
+              <div><dt>Hệ tọa độ</dt><dd>WGS-84</dd></div>
+              <div><dt>Dải tần mô phỏng</dt><dd>118 &ndash; 137 MHz</dd></div>
+              <div><dt>Mô hình</dt><dd>Longley-Rice ITM</dd></div>
+            </dl>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 5. HƯỚNG DẪN ===================== -->
+    <section id="huong-dan" class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-num">05</span>
+          <div>
+            <h2 class="section-title">Các bước thao tác &amp; cấu hình chi tiết</h2>
+            <p class="section-lead text-pretty">Hướng dẫn từng bước (step-by-step) dành cho nhân viên kỹ thuật thực hiện trên Radio Mobile.</p>
+          </div>
+        </div>
+
+        <div class="accordion" id="accordion">
+          <!-- 5.1 -->
+          <div class="acc-item">
+            <button class="acc-head" aria-expanded="true">
+              <span class="acc-step">5.1</span>
+              <span class="acc-title">Hiển thị giản đồ hướng Anten Omni</span>
+              <span class="acc-chevron" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </span>
+            </button>
+            <div class="acc-body">
+              <div class="acc-body-inner">
+                <p>Nạp và hiển thị giản đồ hướng (Antenna Pattern) của anten Omni chuyên dụng hàng không trên ba dạng biểu diễn:</p>
+                <div class="mini-grid">
+                  <div class="mini-card"><h5>Mặt phẳng đứng</h5><p>Elevation plane — đánh giá búp sóng theo góc ngẩng.</p></div>
+                  <div class="mini-card"><h5>Mặt phẳng ngang</h5><p>Azimuth plane — kiểm tra tính vô hướng 360&deg;.</p></div>
+                  <div class="mini-card"><h5>Phối cảnh 3D</h5><p>Hiển thị 3D toàn bộ giản đồ bức xạ của anten.</p></div>
+                </div>
+                <figure class="shot">
+                  <div class="shot-placeholder"><span>Screenshot: Antenna Pattern (Omni VHF)</span></div>
+                  <figcaption>Hình 5.1 — Giản đồ hướng anten Omni hàng không trong Radio Mobile.</figcaption>
+                </figure>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5.2 -->
+          <div class="acc-item">
+            <button class="acc-head" aria-expanded="false">
+              <span class="acc-step">5.2</span>
+              <span class="acc-title">Cấu hình thông số hệ thống (System &amp; Network)</span>
+              <span class="acc-chevron" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </span>
+            </button>
+            <div class="acc-body">
+              <div class="acc-body-inner">
+                <p><strong>Tạo Network &amp; cấu hình chung:</strong> thiết lập tần số hoạt động trong dải <strong>118 &ndash; 137 MHz</strong>, chọn mô hình truyền sóng Longley-Rice và hệ số khúc xạ K = 4/3.</p>
+
+                <div class="param-cols">
+                  <div class="param-block">
+                    <h5>Trạm mặt đất (Máy phát VHF)</h5>
+                    <table class="param-table">
+                      <tbody>
+                        <tr><th>Công suất phát (Tx Power)</th><td>W / dBm</td></tr>
+                        <tr><th>Tổn hao đường truyền</th><td>Line &amp; connector loss (dB)</td></tr>
+                        <tr><th>Loại &amp; độ lợi anten</th><td>Omni — Gain (dBi)</td></tr>
+                        <tr><th>Độ cao anten (AGL)</th><td>Trên tháp ATC / cột anten</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div class="param-block">
+                    <h5>Máy bay (Máy thu VHF)</h5>
+                    <table class="param-table">
+                      <tbody>
+                        <tr><th>Độ nhạy máy thu</th><td>&micro;V / dBm</td></tr>
+                        <tr><th>Độ cao cấu hình</th><td>FL100, FL200 (phân tầng)</td></tr>
+                        <tr><th>Độ lợi anten tàu bay</th><td>Gain (dBi)</td></tr>
+                        <tr><th>Tổn hao hệ thống</th><td>System loss (dB)</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <figure class="shot">
+                  <div class="shot-placeholder"><span>Screenshot: Network Properties &rarr; System</span></div>
+                  <figcaption>Hình 5.2 — Cấu hình System &amp; Network trong Radio Mobile.</figcaption>
+                </figure>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5.3 -->
+          <div class="acc-item">
+            <button class="acc-head" aria-expanded="false">
+              <span class="acc-step">5.3</span>
+              <span class="acc-title">Thêm và cấu hình các nút (Units)</span>
+              <span class="acc-chevron" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </span>
+            </button>
+            <div class="acc-body">
+              <div class="acc-body-inner">
+                <ul class="feature-list">
+                  <li>Tạo tọa độ cho <strong>Trạm VHF mặt đất</strong> — tọa độ chính xác của Đài Kiểm soát không lưu Long Thành.</li>
+                  <li>Tạo các <strong>Unit giả lập vị trí máy bay</strong> tại các ranh giới phân vùng điều hành.</li>
+                  <li>Gán mỗi Unit vào Network và chọn vai trò (Command/Subordinate) tương ứng.</li>
+                </ul>
+
+                <div class="flow">
+                  <span class="flow-step">Tạo Network</span>
+                  <span class="flow-arrow" aria-hidden="true">&rarr;</span>
+                  <span class="flow-step">Nhập System</span>
+                  <span class="flow-arrow" aria-hidden="true">&rarr;</span>
+                  <span class="flow-step">Cấu hình Unit</span>
+                </div>
+
+                <figure class="shot">
+                  <div class="shot-placeholder"><span>Screenshot: Unit Properties &amp; tọa độ trạm</span></div>
+                  <figcaption>Hình 5.3 — Bố trí Units &amp; nhập tọa độ trạm cho tài liệu huấn luyện nội bộ.</figcaption>
+                </figure>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 6. BẢN ĐỒ KẾT QUẢ ===================== -->
+    <section id="ket-qua" class="section section-alt">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-num">06</span>
+          <div>
+            <h2 class="section-title">Xuất &amp; nhúng kết quả lên bản đồ địa hình số</h2>
+            <p class="section-lead text-pretty">Trực quan hóa vùng tầm phủ trên bản đồ tương tác và hướng dẫn xuất file KMZ.</p>
+          </div>
+        </div>
+
+        <div class="map-toolbar">
+          <span class="map-toolbar-label">Lớp hiển thị:</span>
+          <label class="switch">
+            <input type="checkbox" id="toggle-station" checked />
+            <span class="switch-track"></span>
+            <span class="switch-text"><span class="dot dot-station"></span>Trạm VHF</span>
+          </label>
+        </div>
+
+        <div id="map" class="map" role="application" aria-label="Bản đồ tầm phủ VHF Long Thành"></div>
+
+        <p class="map-hint">Tương tác: dùng con lăn chuột để phóng to / thu nhỏ, kéo để di chuyển, bật/tắt các lớp mực bay bằng công tắc phía trên. Nhấp vào vùng phủ hoặc trạm để xem thông tin.</p>
+
+        <div class="card-grid cols-2 gap-top">
+          <article class="card">
+            <h3>Xuất kết quả ra KMZ / KML</h3>
+            <p>Từ Radio Mobile, sau khi tính toán vùng phủ (Radio Coverage), xuất kết quả sang định dạng <code>.kmz</code> hoặc <code>.kml</code> để nhúng lên các nền bản đồ địa lý.</p>
+            <ol class="steps-mini">
+              <li>Chạy <em>Radio Coverage</em> cho từng mực bay (FL100, FL200).</li>
+              <li>Chọn <em>Export &rarr; Google Earth (.kmz)</em>.</li>
+              <li>Đặt thang màu theo cường độ tín hiệu &amp; lưu file.</li>
+            </ol>
+          </article>
+
+          <article class="card">
+            <h3>Phương pháp nhúng lên Web tĩnh</h3>
+            <p>Có thể hiển thị lớp phủ <code>.kmz</code> đè lên bản đồ địa hình thực bằng nhiều thư viện bản đồ phía client:</p>
+            <ul class="lib-list">
+              <li><strong>Leaflet</strong> — nhẹ, mã nguồn mở; dùng plugin <code>leaflet-kmz</code> / <code>omnivore</code> (đang dùng cho demo này).</li>
+              <li><strong>Google Maps API</strong> — <code>KmlLayer</code> tải trực tiếp file KMZ qua URL công khai.</li>
+              <li><strong>CesiumJS</strong> — hiển thị 3D, phù hợp thể hiện tầm phủ theo phân tầng độ cao.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <strong>Nghiên cứu tầm phủ VHF &mdash; Long Thành ATC</strong>
+        <p>Báo cáo kỹ thuật về phương pháp đánh giá vùng phủ sóng thoại Không &ndash; Địa bằng mô phỏng truyền sóng và đối chiếu tiêu chuẩn ICAO.</p>
+      </div>
+      <nav class="footer-nav" aria-label="Liên kết chân trang">
+        <a href="#muc-dich">Mục đích</a>
+        <a href="#phuong-phap">Phương pháp</a>
+        <a href="#tieu-chuan">Tiêu chuẩn ICAO</a>
+        <a href="#radio-mobile">Radio Mobile</a>
+        <a href="#huong-dan">Hướng dẫn</a>
+        <a href="#ket-qua">Bản đồ</a>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; <span id="year"></span> &mdash; Tài liệu kỹ thuật nội bộ. Web tĩnh (HTML/CSS/JS).</span>
+      <span>Mô hình Longley-Rice ITM &middot; Dữ liệu SRTM DTED &middot; ICAO Annex 10 Vol. V</span>
+    </div>
+  </footer>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <!-- KaTeX JS -->
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+          integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+
+  <!-- KMZ/KML helper libraries: JSZip + toGeoJSON -->
+  <script src="https://unpkg.com/jszip@3.10.1/dist/jszip.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mapbox/togeojson@0.16.0/dist/togeojson.umd.js"></script>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>
