@@ -325,15 +325,34 @@
             </button>
             <div class="acc-body">
               <div class="acc-body-inner">
-                <p>Nạp và hiển thị giản đồ hướng (Antenna Pattern) của anten Omni chuyên dụng hàng không trên ba dạng biểu diễn:</p>
-                <div class="mini-grid">
-                  <div class="mini-card"><h5>Mặt phẳng đứng</h5><p>Elevation plane — đánh giá búp sóng theo góc ngẩng.</p></div>
-                  <div class="mini-card"><h5>Mặt phẳng ngang</h5><p>Azimuth plane — kiểm tra tính vô hướng 360&deg;.</p></div>
-                  <div class="mini-card"><h5>Phối cảnh 3D</h5><p>Hiển thị 3D toàn bộ giản đồ bức xạ của anten.</p></div>
+                <p>Anten Omni VHF hàng không CXL 3-1LW được đặc trưng bởi hai giản đồ phóng xạ chính:</p>
+                
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin:20px 0;">
+                  <!-- E-plane Card -->
+                  <div style="border:1px solid var(--border); border-radius:var(--radius-sm); padding:16px; background:var(--surface-2);">
+                    <h5 style="color:var(--accent); margin-top:0;">📊 Mặt phẳng đứng (E-plane)</h5>
+                    <p style="font-size:0.9rem; line-height:1.5;">
+                      <strong>Elevation plane</strong> — Giản đồ theo chiều dọc (phương thẳng đứng) thể hiện tính chất phóng xạ của anten từ góc ngẩng -90° đến +90°. Dùng để đánh giá độ cao của búp sóng chính và mức tế cực.
+                    </p>
+                    <img src="public/E-PLANE.png" alt="E-plane radiation pattern" style="width:100%; max-height:200px; object-fit:contain; border-radius:6px; margin-top:12px;">
+                  </div>
+
+                  <!-- H-plane Card -->
+                  <div style="border:1px solid var(--border); border-radius:var(--radius-sm); padding:16px; background:var(--surface-2);">
+                    <h5 style="color:var(--accent); margin-top:0;">📊 Mặt phẳng ngang (H-plane)</h5>
+                    <p style="font-size:0.9rem; line-height:1.5;">
+                      <strong>Azimuth plane</strong> — Giản đồ theo mặt phẳng ngang thể hiện tính vô hướng 360° của anten. Kiểm tra sự cân đối phóng xạ quanh trục dọc và phát hiện các dạo động về gain theo phương vị.
+                    </p>
+                    <img src="public/H-PLANE.png" alt="H-plane radiation pattern" style="width:100%; max-height:200px; object-fit:contain; border-radius:6px; margin-top:12px;">
+                  </div>
                 </div>
-                <figure class="shot">
-                  <div class="shot-placeholder"><span>Screenshot: Antenna Pattern (Omni VHF)</span></div>
-                  <figcaption>Hình 5.1 — Giản đồ hướng anten Omni hàng không trong Radio Mobile.</figcaption>
+
+                <!-- Antenna Hardware -->
+                <figure class="shot" style="margin-top:20px;">
+                  <div style="background:linear-gradient(135deg, rgba(13,132,214,0.05) 0%, rgba(13,132,214,0.1) 100%); border:1px solid var(--border); border-radius:var(--radius-sm); padding:30px; display:grid; place-items:center; min-height:260px;">
+                    <img src="public/CXL 3-1 LW.png" alt="Anten CXL 3-1LW" style="max-width:90%; max-height:220px; object-fit:contain;">
+                  </div>
+                  <figcaption>Hình 5.1 — Anten Omni CXL 3-1LW cho hệ thống VHF hàng không với giản đồ phóng xạ E-plane và H-plane.</figcaption>
                 </figure>
               </div>
             </div>
