@@ -381,7 +381,7 @@
                   <div style="background:var(--bg-alt); border:1px solid var(--border); border-radius:8px; overflow:hidden;">
                     <img src="public/Bước%201.PNG" alt="Bước 1: Cài đặt Radio Mobile - Thanh công cụ" style="width:100%; height:auto; display:block;">
                   </div>
-                  <figcaption style="margin-top:10px;">Hình 5.1 — Thanh công cụ trên giao diện phần mềm Radio Mobile sau khi cài đặt thành công.</figcaption>
+                  <figcaption style="margin-top:10px;">Hình — Giao diện phần mềm Radio Mobile.</figcaption>
                 </figure>
               </div>
             </div>
@@ -397,12 +397,31 @@
             </button>
             <div class="acc-body">
               <div class="acc-body-inner">
-                <p style="color:var(--text); line-height:1.6; font-size:0.95rem;">[Nulla facilisi. Cras non velit nec enim interdum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.]</p>
+                <p style="color:var(--text); line-height:1.6; font-size:0.95rem; margin-bottom:16px;"><strong>Thiết lập nền bản đồ:</strong> Map Properties là cấu hình nền địa hình số cho mô phỏng.</p>
+                
+                <ol style="color:var(--text); line-height:1.8; font-size:0.95rem; padding-left:20px; margin-bottom:16px;">
+                  <li>Chọn <strong>File → Map Properties</strong> hoặc nhấp vào biểu tượng 
+                    <img src="public/MapProperties%20Icon.png" alt="MapProperties Icon" style="width:24px; height:24px; vertical-align:middle; display:inline-block; margin:0 4px;"> 
+                    trên thanh công cụ.</li>
+                  <li>Cửa sổ <strong>Map Properties</strong> hiện lên. Cấu hình các mục sau:</li>
+                </ol>
+
+                <div style="background:rgba(13,132,214,0.08); border-left:3px solid var(--accent); padding:16px; border-radius:6px; margin:16px 0; font-size:0.95rem; color:var(--text);">
+                  <p style="margin-top:0;"><strong>• Mục Centre:</strong> Xác định tọa độ trung tâm vùng xét tầm phủ (ở đây có thể lấy tọa độ sân bay Long Thành).</p>
+                  
+                  <p><strong>• Size (pixel):</strong> Chọn độ phân giải cho cửa sổ map (thường 600 × 600 hoặc cao hơn).</p>
+                  
+                  <p><strong>• Size (km):</strong> Chọn chiều dài và chiều rộng để hiển thị phần diện tích bản đồ trên cửa sổ. 
+                  <br/><em style="color:var(--text-muted);">Ví dụ:</em> Nếu tầm phủ lớn nhất ước tính có đường kính 300 km, nên chọn kích thước lớn hơn khoảng 3 lần (ví dụ 1000 km) để đảm bảo hiển thị được vùng phủ trong không gian cửa sổ. Nếu set nhỏ hơn 300 km, khi hiển thị tầm phủ có thể không được hiển thị hết trên cửa sổ map, dẫn tới mất một phần vùng phủ khi lưu.</p>
+                  
+                  <p style="margin-bottom:0;"><strong>• Nhấn Extract:</strong> Phần mềm sẽ tự động tải tài nguyên bản đồ địa hình số từ vệ tinh SRTM.</p>
+                </div>
+
                 <figure class="shot" style="margin-top:20px;">
                   <div style="background:var(--bg-alt); border:1px solid var(--border); border-radius:8px; overflow:hidden;">
                     <img src="public/Bước%202.PNG" alt="Bước 2: Cấu hình Map Property" style="width:100%; height:auto; display:block;">
                   </div>
-                  <figcaption style="margin-top:10px;">Hình 5.3 — Bước 2: Cấu hình Map Property và trích xuất dữ liệu địa hình.</figcaption>
+                  <figcaption style="margin-top:10px;">Hình 5.2 — Cửa sổ Map Properties và trích xuất dữ liệu địa hình từ SRTM.</figcaption>
                 </figure>
               </div>
             </div>
@@ -418,15 +437,40 @@
             </button>
             <div class="acc-body">
               <div class="acc-body-inner">
-                <p style="color:var(--text); line-height:1.6; font-size:0.95rem;">[Sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren.]</p>
+                <p style="color:var(--text); line-height:1.6; font-size:0.95rem; margin-bottom:16px;"><strong>Khai báo các điểm trạm:</strong> Unit là các trạm phát/thu cần xét trong mô phỏng.</p>
+                
+                <ol style="color:var(--text); line-height:1.8; font-size:0.95rem; padding-left:20px; margin-bottom:16px;">
+                  <li>Chọn <strong>File → Unit Properties</strong> hoặc nhấp vào biểu tượng 
+                    <img src="public/UnitProperties.png" alt="UnitProperties Icon" style="width:24px; height:24px; vertical-align:middle; display:inline-block; margin:0 4px;"> 
+                    trên thanh công cụ.</li>
+                  <li>Khai báo các unit cần xét:</li>
+                </ol>
+
+                <div style="background:rgba(13,132,214,0.08); border-left:3px solid var(--accent); padding:16px; border-radius:6px; margin:16px 0; font-size:0.95rem; color:var(--text); line-height:1.7;">
+                  <p style="margin-top:0;"><strong>◆ Đối với Trạm phát VHF Main:</strong></p>
+                  <ul style="margin:8px 0 16px 20px; padding:0;">
+                    <li>Xác định tọa độ trạm (lấy tọa độ tháp anten VHF Main tại Trạm Tx/Radar Long Thành).</li>
+                    <li><strong>Elevation:</strong> Chiều cao từ anten so với mặt đất (ví dụ: 78 m).</li>
+                  </ul>
+                  
+                  <p><strong>◆ Đối với VHF trên tàu bay:</strong></p>
+                  <ul style="margin:8px 0 16px 20px; padding:0;">
+                    <li>Khai báo số lượng unit cho VHF tàu bay tùy theo số lượng độ cao cần xét. Ví dụ: xét 12 mốc độ cao thì khai báo 12 unit.</li>
+                    <li><strong>Elevation:</strong> Độ cao tương ứng cho mỗi tàu bay ở độ cao cần xét (ví dụ: FL100 = 3.048 km, FL200 = 6.096 km).</li>
+                    <li><em style="color:var(--text-muted);">Lưu ý:</em> Khi xét tầm phủ theo mặt phẳng nhìn ngang (tính toán diện tích vùng phủ), không cần xác định tọa độ cụ thể cho tàu bay. Nếu muốn quan sát điểm–điểm theo mặt phẳng đứng (Line of Sight), lúc đó mới chọn tọa độ xét cụ thể.</li>
+                  </ul>
+                </div>
+
+                <p style="color:var(--text); font-size:0.95rem; margin:16px 0;">Sau khi nhập đủ số liệu cho mỗi Unit, nhấn <strong>OK</strong>.</p>
+
                 <figure class="shot" style="margin-top:20px;">
                   <div style="background:var(--bg-alt); border:1px solid var(--border); border-radius:8px; overflow:hidden;">
                     <img src="public/Bước%203.PNG" alt="Bước 3: Cấu hình Unit" style="width:100%; height:auto; display:block;">
                   </div>
-                  <figcaption style="margin-top:10px;">Hình- Cấu hình Unit và nhập tọa độ trạm.</figcaption>
-                </figure
+                  <figcaption style="margin-top:10px;">Hình 5.3 — Cửa sổ Unit Properties với khai báo tọa độ trạm phát và các mực bay.</figcaption>
+                </figure>
               </div>
-            </div>
+            </div>  
           </div>
 
           <!-- 5.5 Bước 4: Cấu hình Network -->
@@ -439,12 +483,35 @@
             </button>
             <div class="acc-body">
               <div class="acc-body-inner">
-                <p style="color:var(--text); line-height:1.6; font-size:0.95rem;">[Amen erat, sed diam voluptua. Ut purus eros, vestibulum ac, venenatis ac, fringilla at, lorem. Donec vel sem sed nulla dignissim interdum. Curabitur sed neque vel magna luctus lacinia.]</p>
+                <p style="color:var(--text); line-height:1.6; font-size:0.95rem; margin-bottom:16px;"><strong>Định nghĩa mạng VHF:</strong> Network là tập hợp các Units và các thông số kỹ thuật của mạng.</p>
+                
+                <ol style="color:var(--text); line-height:1.8; font-size:0.95rem; padding-left:20px; margin-bottom:16px;">
+                  <li>Chọn <strong>File → Network Properties</strong> hoặc nhấp vào biểu tượng 
+                    <img src="public/NetworkPropertiesIcon.png" alt="NetworkProperties Icon" style="width:24px; height:24px; vertical-align:middle; display:inline-block; margin:0 4px;"> 
+                    trên thanh công cụ.</li>
+                  <li>Cửa sổ <strong>Network Properties</strong> hiện lên. Chọn tab <strong>'Parameters'</strong> và khai báo:</li>
+                </ol>
+
+                <div style="background:rgba(13,132,214,0.08); border-left:3px solid var(--accent); padding:16px; border-radius:6px; margin:16px 0; font-size:0.95rem; color:var(--text); line-height:1.8;">
+                  <p style="margin-top:0;"><strong>• Net name:</strong> Đặt tên network, ví dụ "VHF LTA" và dải tần số trong mạng (118–137 MHz), phân cực đứng (Vertical).</p>
+                  
+                  <p><strong>• Mode of variability:</strong> Chọn <strong>Broadcast, 95% of time, 95% of locations, 70% of situations</strong>
+                    <br/><em style="color:var(--text-muted);">Ý nghĩa:</em> Hệ thống yêu cầu đảm bảo tín hiệu hoạt động tốt tối thiểu ổn định trong <strong>95% thời gian</strong>, tại <strong>95% các vị trí</strong> trong vùng phủ sóng, và đạt độ tin cậy thuật toán ổn định tình huống là <strong>70%</strong> (đối với hàng không, đây là mức thiết lập an toàn và hợp lý).</p>
+                  
+                  <p><strong>• Surface refractivity (N-Units):</strong> Độ khúc xạ bề mặt — chọn <strong>350 hoặc dao động từ 320–360</strong>, phản ánh điều kiện khí quyển ở vùng nhiệt đới nóng ẩm như Việt Nam. Độ ẩm và nhiệt độ cao làm tăng mật độ hạt hơi nước, khiến chùm tia sóng bị bẻ cong mạnh hơn về phía mặt đất.</p>
+                  
+                  <p><strong>• Ground conductivity (S/m):</strong> Độ dẫn điện của mặt đất — chọn <strong>0.015</strong>, là mức trung bình khá phù hợp cho vùng đồng bằng, trung du hoặc khu vực đất đỏ có độ ẩm tốt.</p>
+                  
+                  <p><strong>• Relative ground permittivity:</strong> Hằng số điện môi tương đối của mặt đất — chọn <strong>22</strong>, chứng tỏ loại đất có độ ẩm rất cao, quyết định hệ số phản xạ của mặt đất khi sóng chạm vào sườn đồi và chướng ngại vật.</p>
+                  
+                  <p style="margin-bottom:0;"><strong>• Climate:</strong> Chọn <strong>Maritime sub-tropical</strong> — đây là sự cân bằng hoàn hảo giữa lý thuyết mô hình và thực tế khí hậu tại Long Thành, vừa phản ánh độ ẩm cao của vùng gió mùa sát biển, vừa mang lại kết quả mô phỏng độ tin cậy cao, sát với điều kiện vận hành thực tế.</p>
+                </div>
+
                 <figure class="shot" style="margin-top:20px;">
                   <div style="background:var(--bg-alt); border:1px solid var(--border); border-radius:8px; overflow:hidden;">
                     <img src="public/Bước%204.PNG" alt="Bước 4: Cấu hình Network" style="width:100%; height:auto; display:block;">
                   </div>
-                  <figcaption style="margin-top:10px;">Hình 5.5 — Bước 4: Cấu hình Network VHF 118-137 MHz.</figcaption>
+                  <figcaption style="margin-top:10px;">Hình 5.4 — Cửa sổ Network Properties với các thông số VHF 118–137 MHz cho khu vực Long Thành.</figcaption>
                 </figure>
               </div>
             </div>
@@ -459,25 +526,28 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
               </span>
             </button>
-            <div class="acc-body">
-              <div class="acc-body-inner">
-                <p style="color:var(--text); line-height:1.6; font-size:0.95rem;">[Proipsum dolor sit amet, consectetur adipiscing elit. Praesent ac urna sit amet leo dictumst. Sed vel lorem vel ante laoreet consectetur. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.]</p>
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:16px;">
-                  <figure class="shot" style="margin:0;">
-                    <div style="background:var(--bg-alt); border:1px solid var(--border); border-radius:8px; overflow:hidden;">
-                      <img src="public/Bước%205%20-1.PNG" alt="Bước 5 - Phần 1" style="width:100%; height:auto; display:block;">
-                    </div>
-                    <figcaption style="margin-top:8px; font-size:0.85rem;">Hình 5.6a — Cấu hình System (Phần 1)</figcaption>
-                  </figure>
-                  <figure class="shot" style="margin:0;">
-                    <div style="background:var(--bg-alt); border:1px solid var(--border); border-radius:8px; overflow:hidden;">
-                      <img src="public/Bước%205-%202.PNG" alt="Bước 5 - Phần 2" style="width:100%; height:auto; display:block;">
-                    </div>
-                    <figcaption style="margin-top:8px; font-size:0.85rem;">Hình 5.6b — Cấu hình System (Phần 2)</figcaption>
-                  </figure>
+             <div class="acc-body">
+                <div class="acc-body-inner">
+                  <p style="color:var(--text); line-height:1.6; font-size:0.95rem; margin-bottom:16px;"><strong>Định nghĩa thiết bị phát/thu:</strong> System là cấu hình chi tiết cho máy phát (Transmitter) và máy thu (Receiver), bao gồm công suất, tần số và đặc tính anten.</p>
+                  
+                  <p style="color:var(--text); line-height:1.6; font-size:0.95rem; margin-bottom:16px;">Vào tab <strong>'System'</strong> trên cửa sổ <strong>'Network Properties'</strong>, tạo profile system cho từng máy phát và máy thu, điền các thông số về công suất phát (TX power), độ lợi anten (Antenna gain), hệ số mất mát (Cable loss) và các tham số khác theo đặc tính thiết bị thực tế của trạm Long Thành.</p>
+
+                  <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:16px;">
+                    <figure class="shot" style="margin:0;">
+                      <div style="background:var(--bg-alt); border:1px solid var(--border); border-radius:8px; overflow:hidden;">
+                        <img src="public/Bước%205%20-1.PNG" alt="Bước 5 - Phần 1: Cấu hình System" style="width:100%; height:auto; display:block;">
+                      </div>
+                      <figcaption style="margin-top:8px; font-size:0.85rem;">Hình 5.5a — Cấu hình System (Phần 1): Thông số Transmitter</figcaption>
+                    </figure>
+                    <figure class="shot" style="margin:0;">
+                      <div style="background:var(--bg-alt); border:1px solid var(--border); border-radius:8px; overflow:hidden;">
+                        <img src="public/Bước%205-%202.PNG" alt="Bước 5 - Phần 2: Cấu hình System" style="width:100%; height:auto; display:block;">
+                      </div>
+                      <figcaption style="margin-top:8px; font-size:0.85rem;">Hình 5.5b — Cấu hình System (Phần 2): Thông số Receiver</figcaption>
+                    </figure>
+                  </div>
                 </div>
               </div>
-            </div>
           </div>
 
           <!-- 5.7 Bước 6: Membership -->
@@ -490,19 +560,32 @@
             </button>
             <div class="acc-body">
               <div class="acc-body-inner">
-                <p style="color:var(--text); line-height:1.6; font-size:0.95rem;">[Vivamus sollicitudin sapien a lectus placerat, hendrerit scelerisque nisi. Integer viverra justo vel dapibus molestie. Donec luctus ante sed magna tempor dignissim sed vel nulla. Phasellus ultricies cursus ipsum nec dapibus.]</p>
+                <p style="color:var(--text); line-height:1.6; font-size:0.95rem; margin-bottom:16px;"><strong>Kết nối các thành phần:</strong> Membership là tab thiết lập liên kết giữa Network, Units và System.</p>
+                
+                <p style="color:var(--text); line-height:1.6; font-size:0.95rem; margin-bottom:16px;">Trên cửa sổ <strong>Network Properties</strong>, vào tab <strong>'Membership'</strong>. Trong network "VHF LTA", chọn các unit từ danh sách bao gồm VHF tại trạm phát và các VHF Rx máy bay theo từng độ cao:</p>
+
+                <div style="background:rgba(13,132,214,0.08); border-left:3px solid var(--accent); padding:16px; border-radius:6px; margin:16px 0; font-size:0.95rem; color:var(--text); line-height:1.8;">
+                  <p style="margin-top:0;"><strong>• Chọn từng unit (bôi xanh)</strong> trong danh sách, sau đó trên mục <strong>Member of VHF LTA</strong> thiết lập:</p>
+                  
+                  <ul style="margin:8px 0 0 20px; padding:0;">
+                    <li><strong>Role of unit:</strong> Chọn "Command" nếu unit là máy phát, "Subordinate" nếu là máy thu.</li>
+                    <li><strong>System:</strong> Gán system cho unit tương ứng (System được khai báo trong tab Systems).</li>
+                    <li><strong>Antenna height (m):</strong> Chiều cao của anten phát/thu so với mặt đất. Ví dụ: unit ở độ cao 600 m thì đặt 600; anten phát ở độ cao 78 m thì để 78.</li>
+                  </ul>
+                </div>
+
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:16px;">
                   <figure class="shot" style="margin:0;">
                     <div style="background:var(--bg-alt); border:1px solid var(--border); border-radius:8px; overflow:hidden;">
-                      <img src="public/Bước%206-1.PNG" alt="Bước 6 - Phần 1" style="width:100%; height:auto; display:block;">
+                      <img src="public/Bước%206-1.PNG" alt="Bước 6 - Phần 1: Membership" style="width:100%; height:auto; display:block;">
                     </div>
-                    <figcaption style="margin-top:8px; font-size:0.85rem;">Hình 5.7a — Membership (Phần 1)</figcaption>
+                    <figcaption style="margin-top:8px; font-size:0.85rem;">Hình 5.6a — Membership (Phần 1): Chọn Units</figcaption>
                   </figure>
                   <figure class="shot" style="margin:0;">
                     <div style="background:var(--bg-alt); border:1px solid var(--border); border-radius:8px; overflow:hidden;">
-                      <img src="public/Bước%206-2%20.PNG" alt="Bước 6 - Phần 2" style="width:100%; height:auto; display:block;">
+                      <img src="public/Bước%206-2%20.PNG" alt="Bước 6 - Phần 2: Membership" style="width:100%; height:auto; display:block;">
                     </div>
-                    <figcaption style="margin-top:8px; font-size:0.85rem;">Hình 5.7b — Membership (Phần 2)</figcaption>
+                    <figcaption style="margin-top:8px; font-size:0.85rem;">Hình 5.6b — Membership (Phần 2): Gán System & Antenna Height</figcaption>
                   </figure>
                 </div>
               </div>
@@ -519,12 +602,37 @@
             </button>
             <div class="acc-body">
               <div class="acc-body-inner">
-                <p style="color:var(--text); line-height:1.6; font-size:0.95rem;">[Risus ornare euismod libero, nec laoreet nulla. Suspendisse potenti. Aenean fringilla, nulla sed fringilla accumsan, magna lorem vulputate lacus, eget feugiat metus est in lorem. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices.]</p>
+                <p style="color:var(--text); line-height:1.6; font-size:0.95rem; margin-bottom:16px;"><strong>Tính toán vùng phủ sóng:</strong> Đây là bước chính tiến hành mô phỏng truyền sóng để vẽ vùng phủ.</p>
+                
+                <ol style="color:var(--text); line-height:1.8; font-size:0.95rem; padding-left:20px; margin-bottom:16px;">
+                  <li>Chọn <strong>Tools → Radio Coverage → Single Polar</strong> hoặc nhấp vào biểu tượng 
+                    <img src="public/PolarRadioCoverage.png" alt="PolarRadioCoverage Icon" style="width:24px; height:24px; vertical-align:middle; display:inline-block; margin:0 4px;"> 
+                    trên thanh công cụ.</li>
+                  <li>Cửa sổ <strong>'Single Polar Radio Coverage'</strong> hiện ra. Thiết lập các mục sau:</li>
+                </ol>
+
+                <div style="background:rgba(13,132,214,0.08); border-left:3px solid var(--accent); padding:16px; border-radius:6px; margin:16px 0; font-size:0.95rem; color:var(--text); line-height:1.8;">
+                  <p style="margin-top:0;"><strong>• Centre unit:</strong> Chọn máy phát VHF tại trạm (Tx unit).</p>
+                  
+                  <p><strong>• Mobile unit:</strong> Chọn VHF thu tại độ cao muốn xét (ví dụ: máy bay ở FL100 hoặc FL200).</p>
+                  
+                  <p><strong>• Network unit:</strong> Tự hiện ra khi chọn Mobile unit tương ứng.</p>
+                  
+                  <p><strong>• Link Direction:</strong> Chọn <strong>"Worst case"</strong> để đánh giá trường hợp xấu nhất (điều kiện bất lợi nhất).</p>
+                  
+                  <p><strong>• Plot:</strong> Thiết lập màu sắc và kiểu viền cho vùng phủ trên bản đồ.</p>
+                  
+                  <p style="margin-bottom:0;"><strong>• Threshold:</strong> Chọn ngưỡng thu tối thiểu:
+                    <br/>— <strong>-107 dBm:</strong> Ngưỡng phát hiện tối thiểu tại đầu vào anten (từng phát hiện tín hiệu).
+                    <br/>— <strong>-83 dBm:</strong> Tương đương 75 μV/m theo tiêu chuẩn ICAO, đảm bảo thoại ra đạt chất lượng tốt.
+                  </p>
+                </div>
+
                 <figure class="shot" style="margin-top:20px;">
                   <div style="background:var(--bg-alt); border:1px solid var(--border); border-radius:8px; overflow:hidden;">
                     <img src="public/Bước%207.PNG" alt="Bước 7: Single Polar Radio Coverage" style="width:100%; height:auto; display:block;">
                   </div>
-                  <figcaption style="margin-top:10px;">Hình 5.8 — Bước 7: Thiết lập Single Polar Radio Coverage.</figcaption>
+                  <figcaption style="margin-top:10px;">Hình 5.7 — Cửa sổ Single Polar Radio Coverage với cấu hình cho mô phỏng tầm phủ.</figcaption>
                 </figure>
               </div>
             </div>
@@ -540,12 +648,20 @@
             </button>
             <div class="acc-body">
               <div class="acc-body-inner">
-                <p style="color:var(--text); line-height:1.6; font-size:0.95rem;">[Posuere velit aliquet. Praesent ac mauris at mi hendrerit tincidunt. Cras eget nunc a nunc sodales dictum sed vel metus. Nam porttitor, neque sed tincidunt rutrum, lectus ante pellentesque felis, vel lacinia arcu lacus sed eros.]</p>
+                <p style="color:var(--text); line-height:1.6; font-size:0.95rem; margin-bottom:16px;"><strong>Vẽ và lưu kết quả:</strong> Sau khi cấu hình đầy đủ, tiến hành vẽ vùng phủ.</p>
+                
+                <ol style="color:var(--text); line-height:1.8; font-size:0.95rem; padding-left:20px;">
+                  <li>Nhấn nút <strong>"Draw"</strong> để hệ thống tiến hành mô phỏng và vẽ vùng phủ sóng trên bản đồ.</li>
+                  <li>Chờ quá trình tính toán hoàn tất (có thể mất vài phút tùy theo độ phân giải và kích thước vùng xét).</li>
+                  <li>Sau khi hệ thống vẽ xong kết quả, một vùng phủ hình tròn hoặc không đều sẽ xuất hiện trên bản đồ, thể hiện area có tín hiệu từ trạm phát.</li>
+                  <li>Lưu kết quả về máy dưới định dạng <strong>.png</strong> hoặc <strong>.kml</strong> bằng cách chọn <strong>File → Save As</strong>.</li>
+                </ol>
+
                 <figure class="shot" style="margin-top:20px;">
                   <div style="background:var(--bg-alt); border:1px solid var(--border); border-radius:8px; overflow:hidden;">
-                    <img src="public/Bước%208.PNG" alt="Bước 8: Draw & Save" style="width:100%; height:auto; display:block;">
+                    <img src="public/Bước%208.PNG" alt="Bước 8: Draw kết quả & lưu hình ảnh" style="width:100%; height:auto; display:block;">
                   </div>
-                  <figcaption style="margin-top:10px;">Hình 5.9 — Bước 8: Vẽ kết quả và lưu hình ảnh.</figcaption>
+                  <figcaption style="margin-top:10px;">Hình 5.8 — Kết quả vẽ vùng phủ trên bản đồ địa hình và tùy chọn lưu file.</figcaption>
                 </figure>
               </div>
             </div>
@@ -561,14 +677,24 @@
             </button>
             <div class="acc-body">
               <div class="acc-body-inner">
-                <p style="color:var(--text); line-height:1.6; font-size:0.95rem;">[Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, ornare a, wisi. Aenean ut erat sed dictum vel mi. Nulla pellentesque.]</p>
-                <figure class="shot" style="margin-top:20;">
-                  <div style="background:var(--bg-alt); border:1px solid var(--border); border-radius:8px; overflow:hidden;">
-                    <div style="padding:20px; text-align:center; color:var(--text); font-size:0.9rem; font-style:italic;">
-                      🖼️ Hình cho Bước 9 sẽ được thêm vào
-                    </div>
+                <p style="color:var(--text); line-height:1.6; font-size:0.95rem; margin-bottom:16px;"><strong>Xuất và trực quan hóa trên Google Earth:</strong> Bước cuối cùng để nhúng vùng phủ trên nền bản đồ địa lý toàn cầu.</p>
+                
+                <ol style="color:var(--text); line-height:1.8; font-size:0.95rem; padding-left:20px;">
+                  <li>Import kết quả vào phần mềm <strong>Google Earth Pro</strong>.</li>
+                  <li>Dùng công cụ <strong>polygon</strong> trong Google Earth để vẽ lại hoặc tinh chỉnh kết quả sao cho đẹp mắt và chính xác.</li>
+                  <li>Sau khi hoàn tất chỉnh sửa, chọn <strong>'Save place as'</strong> để lưu về dưới định dạng <strong>KMZ</strong>.</li>
+                  <li>File KMZ là định dạng nén chứa dữ liệu địa lý và có thể nhúng vào bản đồ web hoặc chia sẻ với các hệ thống GIS khác.</li>
+                </ol>
+
+                <div style="background:rgba(13,132,214,0.08); border-left:3px solid var(--accent); padding:16px; border-radius:6px; margin:16px 0; font-size:0.95rem; color:var(--text); line-height:1.8;">
+                  <p style="margin:0;"><strong>💡 Để tính toán kết quả tầm phủ (km hoặc NM):</strong> Có thể dùng thước đo trên Radio Mobile hoặc trên Google Earth Pro để đo từ tâm đài ra viền vùng phủ, sau đó tính toán khoảng cách tính bằng km hoặc Nautical Miles (NM).</p>
+                </div>
+
+                <figure class="shot" style="margin-top:20px;">
+                  <div style="background:linear-gradient(135deg, rgba(13,132,214,0.08) 0%, rgba(13,132,214,0.12) 100%); border:1px solid rgba(13,132,214,0.2); border-radius:8px; padding:30px; display:grid; place-items:center; min-height:200px;">
+                    <img src="public/Bước%208.PNG" alt="Bước 9: Google Earth KMZ" style="max-width:90%; max-height:180px; object-fit:contain;">
                   </div>
-                  <figcaption style="margin-top:10px;">Hình 5.10 — Bước 9: Mở trên Google Earth và xuất KMZ.</figcaption>
+                  <figcaption style="margin-top:10px;">Hình 5.9 — Vùng phủ được nhúng trên Google Earth Pro dưới định dạng KMZ, sẵn sàng để chia sẻ hoặc trực quan hóa trên bản đồ web.</figcaption>
                 </figure>
               </div>
             </div>
