@@ -661,7 +661,7 @@
                   <div style="background:var(--bg-alt); border:1px solid var(--border); border-radius:8px; overflow:hidden;">
                     <img src="public/Bước%208.PNG" alt="Bước 8: Draw kết quả & lưu hình ảnh" style="width:100%; height:auto; display:block;">
                   </div>
-                  <figcaption style="margin-top:10px;">Hình 5.8 — Kết quả vẽ vùng phủ trên bản đồ địa hình và tùy chọn lưu file.</figcaption>
+                  <figcaption style="margin-top:10px;">Hình — Kết quả được tự động vẽ ra khi nhấn Draw.</figcaption>
                 </figure>
               </div>
             </div>
@@ -694,13 +694,13 @@
                   <div style="background:linear-gradient(135deg, rgba(13,132,214,0.08) 0%, rgba(13,132,214,0.12) 100%); border:1px solid rgba(13,132,214,0.2); border-radius:8px; padding:30px; display:grid; place-items:center; min-height:200px;">
                     <img src="public/Bước%209-1.PNG" alt="Bước 9: Google Earth KMZ" style="max-width:90%; max-height:180px; object-fit:contain;">
                   </div>
-                  <figcaption style="margin-top:10px;">Hình 5.9 — Vùng phủ được nhúng trên Google Earth Pro dưới định dạng KMZ, sẵn sàng để chia sẻ hoặc trực quan hóa trên bản đồ web.</figcaption>
+                  <figcaption style="margin-top:10px;">Hình — Hiển thị vùng phủ khi import file .png vào Google Earth.</figcaption>
                 </figure>
                 <figure class="shot" style="margin-top:20px;">
                   <div style="background:linear-gradient(135deg, rgba(13,132,214,0.08) 0%, rgba(13,132,214,0.12) 100%); border:1px solid rgba(13,132,214,0.2); border-radius:8px; padding:30px; display:grid; place-items:center; min-height:200px;">
                     <img src="public/Bước%209-2.PNG" alt="Bước 9: Google Earth KMZ" style="max-width:90%; max-height:180px; object-fit:contain;">
                   </div>
-                  <figcaption style="margin-top:10px;">Hình 5.9 — Vùng phủ được nhúng trên Google Earth Pro dưới định dạng KMZ, sẵn sàng để chia sẻ hoặc trực quan hóa trên bản đồ web.</figcaption>
+                  <figcaption style="margin-top:10px;">Hình — Vùng phủ được vẽ lại bằng polygon.</figcaption>
                 </figure>
               </div>
             </div>
@@ -715,7 +715,7 @@
         <div class="section-head">
           <span class="section-num">06</span>
           <div>
-            <h2 class="section-title">Xuất &amp; nhúng kết quả lên bản đồ địa hình số</h2>
+            <h2 class="section-title">Tổng hợp kết quả</h2>
             <p class="section-lead text-pretty">Trực quan hóa vùng tầm phủ trên bản đồ tương tác và hướng dẫn xuất file KMZ.</p>
           </div>
         </div>
@@ -732,28 +732,6 @@
         <div id="map" class="map" role="application" aria-label="Bản đồ tầm phủ VHF Long Thành"></div>
 
         <p class="map-hint">Tương tác: dùng con lăn chuột để phóng to / thu nhỏ, kéo để di chuyển, bật/tắt các lớp mực bay bằng công tắc phía trên. Nhấp vào vùng phủ hoặc trạm để xem thông tin.</p>
-
-        <div class="card-grid cols-2 gap-top">
-          <article class="card">
-            <h3>Xuất kết quả ra KMZ / KML</h3>
-            <p>Từ Radio Mobile, sau khi tính toán vùng phủ (Radio Coverage), xuất kết quả sang định dạng <code>.kmz</code> hoặc <code>.kml</code> để nhúng lên các nền bản đồ địa lý.</p>
-            <ol class="steps-mini">
-              <li>Chạy <em>Radio Coverage</em> cho từng mực bay (FL100, FL200).</li>
-              <li>Chọn <em>Export &rarr; Google Earth (.kmz)</em>.</li>
-              <li>Đặt thang màu theo cường độ tín hiệu &amp; lưu file.</li>
-            </ol>
-          </article>
-
-          <article class="card">
-            <h3>Phương pháp nhúng lên Web tĩnh</h3>
-            <p>Có thể hiển thị lớp phủ <code>.kmz</code> đè lên bản đồ địa hình thực bằng nhiều thư viện bản đồ phía client:</p>
-            <ul class="lib-list">
-              <li><strong>Leaflet</strong> — nhẹ, mã nguồn mở; dùng plugin <code>leaflet-kmz</code> / <code>omnivore</code> (đang dùng cho demo này).</li>
-              <li><strong>Google Maps API</strong> — <code>KmlLayer</code> tải trực tiếp file KMZ qua URL công khai.</li>
-              <li><strong>CesiumJS</strong> — hiển thị 3D, phù hợp thể hiện tầm phủ theo phân tầng độ cao.</li>
-            </ul>
-          </article>
-        </div>
       </div>
     </section>
   </main>
